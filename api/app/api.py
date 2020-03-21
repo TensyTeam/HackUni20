@@ -3,7 +3,6 @@ from app import app
 import pymongo
 from pymongo import MongoClient
 import json
-import requests
 import time
 
 
