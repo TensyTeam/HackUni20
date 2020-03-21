@@ -1,15 +1,32 @@
 <script>
+	import ClickOutside from 'svelte-click-outside';
+
 	export let status;
 	export let text;
+
+	let innerEl;
+
+	function search() {
+		status = 1;
+	}
+
+    function outsearch() {
+    	status = 0;
+    }
 </script>
 
 <div class="start">
-	<input
-		placeholder="Привет 😉"
-		class={status ? 'active' : 'disactive'}
-		bind:value={text}
-		on:click
-	/>
+	<div>
+		<ClickOutside on:clickoutside={outsearch} exclude={[innerEl]}>
+			<input
+				placeholder="Привет 😉"
+				class={status ? 'active' : 'disactive'}
+				bind:value={text}
+				on:click={search}
+				bind:this={innerEl}
+			/>
+		</ClickOutside>
+	</div>
 </div>
 
 <style>
@@ -21,6 +38,10 @@
 		width: 100vw;
 		height: 100vh;
 		line-height: 85vh;
+	}
+
+	.start div {
+		line-height: 1rem;
 	}
 
 	.start input {
