@@ -1,5 +1,6 @@
 <script>
 	import ClickOutside from 'svelte-click-outside';
+	// import { flip } from 'svelte/animate';
 
 	export let status;
 	export let text;
@@ -11,16 +12,16 @@
 	}
 
     function outsearch() {
-    	status = 0;
+    	status = 2;
     }
 </script>
 
-<div class="start">
+<div class={status === 1 ? 'start start-extra' : status === 2 ? 'start start-back' : 'start'}>
 	<div>
 		<ClickOutside on:clickoutside={outsearch} exclude={[innerEl]}>
 			<input
 				placeholder="Привет 😉"
-				class={status ? 'active' : 'disactive'}
+				class={status === 1 ? 'active' : 'disactive'}
 				bind:value={text}
 				on:click={search}
 				bind:this={innerEl}
@@ -38,6 +39,38 @@
 		width: 100vw;
 		height: 100vh;
 		line-height: 85vh;
+	}
+
+	.start-extra {
+		animation: display 1.5s 1;
+		animation-fill-mode: forwards;
+	}
+
+	.start-back {
+		animation: display-back 1.5s 1;
+		animation-fill-mode: forwards;
+	}
+
+	@keyframes display {
+		0% {
+			top: 0;
+			line-height: 85vh;
+		}
+		100% {
+			top: 25px;
+			line-height: 1rem;
+		}
+	}
+
+	@keyframes display-back {
+		0% {
+			top: 25px;
+			line-height: 1rem;
+		}
+		100% {
+			top: 0;
+			line-height: 85vh;
+		}
 	}
 
 	.start div {
@@ -63,10 +96,10 @@
 	}
 
 	.active {
-		background-color: #c0c0c0 !important;
+		/* background-color: #c0c0c0 !important; */
 	}
 
 	.disactive {
-		background-color: #fff !important;
+		/* background-color: #fff !important; */
 	}
 </style>
