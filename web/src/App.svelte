@@ -4,18 +4,15 @@
 	let status = 0;
 	let text = '';
 
-	function changeStatus(event) {
-		status = event.detail.cont;
-		console.log(text);
+	function search() {
+		status = 1;
 	}
 </script>
 
 <main>
-	<Search status={status} bind:text={text} on:changeStatus={changeStatus} />
+	<Search
+		status={status}
+		bind:text={text}
+		on:click={search}
+	/>
 </main>
-
-<style>
-	main {
-		padding: 8px;
-	}
-</style>

@@ -1,40 +1,14 @@
 <script>
 	export let status;
 	export let text;
-
-	import { createEventDispatcher } from 'svelte';
-	const dispatch = createEventDispatcher();
-
-	let triggerOut = false;
-	let triggerIn = false;
-
-	function search() {
-		dispatch('changeStatus', {
-			cont: 1,
-		});
-
-		triggerIn = true;
-	}
-
-	// function update
-
-	function outsearch() {
-		triggerOut = true;
-	}
-
-	$: ressearch(triggerIn, triggerOut)
-
-	function ressearch(triggerIn, triggerOut) {
-		console.log(triggerIn, triggerOut);
-	}
 </script>
 
-<div class="start" on:click={outsearch}>
+<div class="start">
 	<input
 		placeholder="Привет 😉"
 		class={status ? 'active' : 'disactive'}
 		bind:value={text}
-		on:click={search}
+		on:click
 	/>
 </div>
 
