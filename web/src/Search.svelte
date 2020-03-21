@@ -1,9 +1,7 @@
 <script>
 	import ClickOutside from 'svelte-click-outside';
-	// import { flip } from 'svelte/animate';
 
-	export let status;
-	export let text;
+	export let status, text;
 
 	let innerEl;
 
@@ -12,16 +10,19 @@
 	}
 
     function outsearch() {
-    	status = 2;
+		if (text.length) {
+			status = 3;
+		} else {
+			status = 2;
+		}
     }
 </script>
 
-<div class={status === 1 ? 'start start-extra' : status === 2 ? 'start start-back' : 'start'}>
+<div class={status === 0 ? 'start' : status === 2 ? 'start start-back' : 'start start-extra'}>
 	<div>
 		<ClickOutside on:clickoutside={outsearch} exclude={[innerEl]}>
 			<input
-				placeholder="Привет 😉"
-				class={status === 1 ? 'active' : 'disactive'}
+				placeholder={status === 1 ? 'Поиск' : "Привет 😉"}
 				bind:value={text}
 				on:click={search}
 				bind:this={innerEl}
@@ -42,20 +43,18 @@
 	}
 
 	.start-extra {
-		animation: display 1.5s 1;
+		animation: display 1s 1;
 		animation-fill-mode: forwards;
 	}
 
 	.start-back {
-		animation: display-back 1.5s 1;
+		top: 25px;
+		line-height: 1rem;
+		animation: display-back 1s 1;
 		animation-fill-mode: forwards;
 	}
 
 	@keyframes display {
-		0% {
-			top: 0;
-			line-height: 85vh;
-		}
 		100% {
 			top: 25px;
 			line-height: 1rem;
@@ -63,10 +62,6 @@
 	}
 
 	@keyframes display-back {
-		0% {
-			top: 25px;
-			line-height: 1rem;
-		}
 		100% {
 			top: 0;
 			line-height: 85vh;
@@ -93,13 +88,5 @@
 			0 1px 4px rgba(0, 0, 0, .3),
 			-23px 0 20px -23px rgba(0, 0, 0, .8),
 			13px 0 20px -23px rgba(0, 0, 0, .8);
-	}
-
-	.active {
-		/* background-color: #c0c0c0 !important; */
-	}
-
-	.disactive {
-		/* background-color: #fff !important; */
 	}
 </style>
