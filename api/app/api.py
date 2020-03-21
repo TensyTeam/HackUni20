@@ -20,7 +20,7 @@ def save_token():
 	else:
 		user_data = {
 			'id': users.count() + 1,
-			'token': users.count() + 1,
+			'token': x['token'],
 			'search': [],
 		}
 		users.insert_one(user_data)
