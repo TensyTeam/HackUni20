@@ -1,44 +1,56 @@
 <script>
 	import { onMount } from 'svelte';
 
-	export let status;
+	export let status, text;
 
 	let smiles = [{
 		emoji: '😂',
 		text: '',
+		selected: false,
 	}, {
 		emoji: '♥️',
 		text: '',
+		selected: false,
 	}, {
 		emoji: '🤔',
 		text: '',
+		selected: false,
 	}, {
 		emoji: '🔥',
 		text: '',
+		selected: false,
 	}, {
 		emoji: '🕵️',
 		text: '',
+		selected: false,
 	}, {
 		emoji: '😳',
 		text: '',
+		selected: false,
 	}, {
 		emoji: '😭',
 		text: '',
+		selected: false,
 	}, {
 		emoji: '👽',
 		text: '',
+		selected: false,
 	}, {
 		emoji: '😱',
 		text: '',
+		selected: false,
 	}, {
 		emoji: '🤘',
 		text: '',
+		selected: false,
 	}, {
 		emoji: '🤯',
 		text: '',
+		selected: false,
 	}, {
 		emoji: '👩‍🎓',
 		text: '',
+		selected: false,
 	}];
 
 	// Определение размера смайликов
@@ -54,12 +66,35 @@
 	onMount(changeSize);
 
 	window.onresize = changeSize;
+
+	// Выбор фильтров
+
+	function changeFilter(emoji) {
+		let ind = text.indexOf(emoji);
+
+		if (ind !== -1) {
+			text = text.substring(0, ind) + text.substring(ind+3, text.length);
+		} else {
+			text += emoji + " ";
+		}
+
+		smiles = smiles.map((el) => {
+			if (el.emoji === emoji) {
+				el.selected = !el.selected;
+			}
+			return el;
+		})
+	}
 </script>
 
 <div class={status === 0 ? 'filters' : status === 2 ? 'filters filters-back' : 'filters filters-extra'}>
 	<div class="smiles">
 		{#each smiles as smile, i}
-			<div class={"smile" + (i>9 ? " extra5" : "") + (i>8 ? " extra3" : "")} id="button">{smile.emoji}</div>
+			<div
+				class={"smile" + (i>9 ? " extra5" : "") + (i>8 ? " extra3" : "") + (smile.selected ? " selected" : "")}
+				id="button"
+				on:click={() => {changeFilter(smile.emoji)}}
+			>{smile.emoji}</div>
 		{/each}
 	</div>
 </div>
@@ -70,6 +105,8 @@
 
 		position: fixed;
 		top: 47vh;
+
+		display: block;
 
 		text-align: center;
 	}
@@ -114,8 +151,13 @@
 		background-color: rgba(0, 0, 0, 0.12);
 		border-radius: 15px;
 		margin: 8px;
+		cursor: pointer;
 
 		overflow: hidden;
+	}
+
+	.selected {
+		background-color: rgba(0, 0, 0, 0.3);
 	}
 
 	.extra5 {

@@ -31,5 +31,6 @@
 	/>
 	<Filters
 		status={status}
+		bind:text={text}
 	/>
 </main>
