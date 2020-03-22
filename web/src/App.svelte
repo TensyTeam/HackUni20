@@ -2,6 +2,7 @@
 	import Search from './Search.svelte';
 	import Books from './Books.svelte';
 	import Filters from './Filters.svelte';
+	import Top from './Top.svelte';
 
 	let status = 0;
 	let text = '';
@@ -22,6 +23,7 @@
 </script>
 
 <main>
+	<Top />
 	<Search
 		bind:status={status}
 		bind:text={text}
