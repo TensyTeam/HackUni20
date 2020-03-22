@@ -48,7 +48,10 @@
 			<table>
 				<tr>
 					<td>{i+1}.</td>
-					<td id="image"><img src={book.img} alt={book.name}></td>
+					<td id="image">
+						<img src={book.img} alt={book.name}>
+						<button>Купить</button>
+					</td>
 					<td>
 						<h3>{book.name}</h3>
 						<p>{book.description}</p>
@@ -74,16 +77,6 @@
 			margin-top: 53vh;
 		}
 	}
-
-	/* @media all and (max-width: 390px) {
-		.books {
-			margin-top: 42vh;
-		}
-	} */
-
-	/* .disable {
-		display: none;
-	} */
 
 	.book {
 		width: 80vw;
@@ -113,6 +106,14 @@
 
 	.book td#image img {
 		width: 100%;
+	}
+
+	.book td#image button {
+		width: 100%;
+		padding: 10px;
+		background-color: greenyellow;
+		cursor: pointer;
+		margin-top: 15px;
 	}
 
 	.book td:last-child {

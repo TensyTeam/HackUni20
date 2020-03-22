@@ -154,7 +154,7 @@
 		position: relative;
 		width: calc(16.66% - 16px);
 		padding: 25px 26px 25px 24px;
-		background-color: rgba(0, 0, 0, 0.12);
+		background-color: #ffeaa7; /* rgba(0, 0, 0, 0.12); */
 		border-radius: 15px;
 		margin: 8px;
 		cursor: pointer;
@@ -163,7 +163,7 @@
 	}
 
 	.selected {
-		background-color: rgba(0, 0, 0, 0.3);
+		background-color: #fdcb6e; /* rgba(0, 0, 0, 0.3); */
 	}
 
 	.extra5 {
