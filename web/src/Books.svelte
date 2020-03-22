@@ -111,9 +111,10 @@
 	.book td#image button {
 		width: 100%;
 		padding: 10px;
-		background-color: greenyellow;
+		background-color: #ffeaa7;
 		cursor: pointer;
 		margin-top: 15px;
+		border: 0;
 	}
 
 	.book td:last-child {
