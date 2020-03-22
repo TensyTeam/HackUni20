@@ -127,4 +127,16 @@
 		color: #c0c0c0;
 		font-size: 1rem;
 	}
+
+	@media all and (max-width: 620px) {
+		.book td:first-child {
+			display: none;
+			width: 0;
+		}
+
+		.book td#image {
+			display: none;
+			width: 0;
+		}
+	}
 </style>
