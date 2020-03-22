@@ -55,7 +55,6 @@ def search():
 	cont = x['cont'].split(' ')
 	if(cont[0] in smile.keys()):
 		cont = list(map(fun, cont))
-		#		print('!', cont)
 	cont = ' '.join(cont)
 
 	#description
@@ -117,5 +116,7 @@ def search():
 	obj_with_sim.sort(key = lambda text: text[1], reverse = True)
 	obj_with_sim = obj_with_sim[0: 10]
 	obj_with_sim = [t[0] for t in obj_with_sim]
+
+	users.update_one({'token': x['token']}, { '$set': { 'search': obj_with_sim[0]['kind'] }})
 
 	return json.dumps(obj_with_sim)
