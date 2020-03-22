@@ -45,8 +45,16 @@
 <!-- {"books" + (text.length ? "" : " disable")}> -->
 	{#each books.slice(0, count) as book, i}
 		<div class="book" transition:slide|local>
-			<div>{i+1}.</div>
-			<div>{book.name}</div>
+			<table>
+				<tr>
+					<td>{i+1}.</td>
+					<td id="image"><img src={book.img} alt={book.name}></td>
+					<td>
+						<h3>{book.name}</h3>
+						<p>{book.description}</p>
+					</td>
+				</tr>
+			</table>
 		</div>
 		<br />
 	{/each}
@@ -88,12 +96,35 @@
 		font-size: 1.5rem;
 	}
 
-	.book div:first-child {
+	.book div {
+		box-sizing: border-box;
+	}
+
+	.book td:first-child {
 		width: 20px;
 		vertical-align: top;
 	}
 
-	.book div:last-child {
-		width: calc(100% - 30px);
+	.book td#image {
+		width: 150px;
+		padding: 10px 25px;
+		vertical-align: top;
+	}
+
+	.book td#image img {
+		width: 100%;
+	}
+
+	.book td:last-child {
+		width: calc(100% - 180px);
+	}
+
+	.book td:last-child h3 {
+		font-weight: 500;
+	}
+
+	.book td:last-child p {
+		color: #c0c0c0;
+		font-size: 1rem;
 	}
 </style>

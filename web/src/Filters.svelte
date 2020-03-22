@@ -113,6 +113,8 @@
 		display: block;
 
 		text-align: center;
+
+		background-color: #fff;
 	}
 
 	.filters-extra {
