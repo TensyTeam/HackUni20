@@ -16,7 +16,7 @@ def save_token():
 	x = request.json
 
 	if users.find_one({'token': x['token']}):
-		results = books.find({}).limit(3)
+		results = books.find({},{'_id': False}).limit(3)
 	else:
 		user_data = {
 			'id': users.count() + 1,
@@ -25,7 +25,7 @@ def save_token():
 		}
 		users.insert_one(user_data)
 
-		results = books.find({}).limit(3)
+		results = books.find({},{'_id': False}).limit(3)
 
 	ans = []
 	for result in results:
@@ -38,7 +38,7 @@ def save_token():
 def search():
 	x = request.json
 
-	results = books.find({})
+	results = books.find({},{'_id': False}).limit(3)
 	ans = []
 	for result in results:
 		ans.append(result)
