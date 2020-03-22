@@ -36,6 +36,9 @@
 		opacity: 0;
 		animation: display 1s 1;
 		animation-fill-mode: forwards;
+
+		z-index: 1000;
+    	position: relative;
 	}
 
 	@keyframes display {
@@ -53,7 +56,6 @@
 
 		display: flex;
 	    align-items: center;
-		z-index: 1000;
     	position: relative;
 		overflow: scroll;
 	}
