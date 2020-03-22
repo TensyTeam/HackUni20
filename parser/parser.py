@@ -20,10 +20,6 @@ with open('data.json', 'w') as file:
 
 		# Парсинг
 		soup = BeautifulSoup(html, 'html.parser')
-
-		# kind = soup.find('h1').text.split('«')[1].split('»')[0]
-		# print(kind)
-
 		table = soup.find('div', {'id': 'new-quotes'})
 
 		try:
@@ -41,8 +37,12 @@ with open('data.json', 'w') as file:
 				title = book.find('div', {'class': 'main-list-item-right-1__left'}).text.strip()
 				name = title.split('\n')[0]
 				author = title.split('\n')[1]
+
 				src = book.find('div', {'class': 'main-list-item-right-1__left'}).find('a').get('href')
-				img = book.find('div', {'class': 'main-list-item__left'}).find('img').get('src')
+				html_book = requests.get(src).text
+				soup_book = BeautifulSoup(html_book, 'html.parser')
+				img = soup_book.find('div', {'class': 'poster'}).find('img').get('src')
+
 				rating = float(book.find('span', {'class': 'rating'}).text)
 				description = book.find('div', {'class': 'main-list-item-right-description'}).text
 			except:
@@ -54,7 +54,7 @@ with open('data.json', 'w') as file:
 				'link': src,
 				'img': LINK + img,
 				'rating': rating,
-				'description': description,
+				'description': description.strip(),
 				'kind': kind_id + 1,
 			}
 			data = json.dumps(req, ensure_ascii=False)
