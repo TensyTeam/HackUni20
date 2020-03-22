@@ -7,30 +7,40 @@
 
 	// Получение книг
 
-	let books=[];
+	let books = [];
 
 	function getPosts(data={}) {
 		const handlerSuccess = (res) => {
-			books=res;
+			books = res;
+
+			if (count === 0) {
+				setTimeout(function() {count=1;}, 250);
+				setTimeout(function() {count=2;}, 500);
+				setTimeout(function() {count=3;}, 750);
+			}
+			// setInterval(function() {if (count < 3) {count++;}}, 250);
 		};
 
 		api('search', data, handlerSuccess);
 	};
-
-	getPosts({cont: text});
 
 	// Анимация подгрузки
 
 	let count = 0;
 
 	$: if (text.length) {
-		setInterval(function() {if (count < 3) {count++;}}, 250);
+		getPosts({cont: text});
+	} else {
+		setTimeout(function() {count=2;}, 250);
+		setTimeout(function() {count=1;}, 500);
+		setTimeout(function() {count=0;}, 750);
 	}
 </script>
 
-<div class={"books" + (text.length ? "" : " disable")}>
+<div class="books">
+<!-- {"books" + (text.length ? "" : " disable")}> -->
 	{#each books.slice(0, count) as book, i}
-		<div class="book" transition:slide|local="{{delay: 10}}">
+		<div class="book" transition:slide|local>
 			<div>{i+1}.</div>
 			<div>{book.name}</div>
 		</div>
@@ -47,9 +57,9 @@
 		text-align: center;
 	}
 
-	.disable {
+	/* .disable {
 		display: none;
-	}
+	} */
 
 	.book {
 		width: 80vw;
