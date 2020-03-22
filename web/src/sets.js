@@ -1,6 +1,6 @@
 export const server = {
-	link: 'http://0.0.0.0:5051/',
-	// link: 'https://mikepetrov.ru/hackuniversity',
+	// link: 'http://0.0.0.0:5051/',
+	link: 'https://mikepetrov.ru/hackuniversity/',
 	ip: '0.0.0.0',
 	port: 5051,
 }

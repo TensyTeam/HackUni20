@@ -17,6 +17,8 @@
 				setTimeout(function() {count=1;}, 250);
 				setTimeout(function() {count=2;}, 500);
 				setTimeout(function() {count=3;}, 750);
+				setTimeout(function() {count=4;}, 1000);
+				setTimeout(function() {count=5;}, 1250);
 			}
 			// setInterval(function() {if (count < 3) {count++;}}, 250);
 		};
@@ -31,9 +33,11 @@
 	$: if (text.length) {
 		getPosts({cont: text});
 	} else {
-		setTimeout(function() {count=2;}, 250);
-		setTimeout(function() {count=1;}, 500);
-		setTimeout(function() {count=0;}, 750);
+		setTimeout(function() {count=4;}, 250);
+		setTimeout(function() {count=3;}, 500);
+		setTimeout(function() {count=2;}, 750);
+		setTimeout(function() {count=1;}, 1000);
+		setTimeout(function() {count=0;}, 1250);
 	}
 </script>
 
@@ -52,10 +56,22 @@
 	.books {
 		width: 100%;
 
-		margin-top: 47vh;
+		margin-top: 42vh;
 
 		text-align: center;
 	}
+
+	@media all and (max-width: 490px) {
+		.books {
+			margin-top: 53vh;
+		}
+	}
+
+	/* @media all and (max-width: 390px) {
+		.books {
+			margin-top: 42vh;
+		}
+	} */
 
 	/* .disable {
 		display: none;
