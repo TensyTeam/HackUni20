@@ -23,14 +23,19 @@
 </script>
 
 <main>
-	<Top />
+	{#if status === 0 || status === 2}
+		<Top />
+	{/if}
+
 	<Search
 		bind:status={status}
 		bind:text={text}
 	/>
+
 	<Books
 		text={text}
 	/>
+
 	<Filters
 		status={status}
 		bind:text={text}
