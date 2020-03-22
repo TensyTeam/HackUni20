@@ -29,5 +29,7 @@
 	<Books
 		text={text}
 	/>
-	<Filters />
+	<Filters
+		status={status}
+	/>
 </main>
