@@ -74,13 +74,17 @@
 
 		if (ind !== -1) {
 			text = text.substring(0, ind) + text.substring(ind+3, text.length);
+
+			if (text === " ") {
+				text = "";
+			}
 		} else {
 			text += emoji + " ";
 		}
 
 		smiles = smiles.map((el) => {
 			if (el.emoji === emoji) {
-				el.selected = !el.selected;
+				el.selected = ind === -1;
 			}
 			return el;
 		})
