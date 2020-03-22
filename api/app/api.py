@@ -18,7 +18,10 @@ smile = {"😂": "комедия", "♥️": "любовь", "🤔": "сложн
 "😱": "удивление", "🤘": "великое", "🤯": "взрыв", "👩‍🎓": "учеба"}
 
 def fun(s):
-	return smile[s]
+	try:
+		return smile[s]
+	except:
+		return ''
 
 @app.route('/top', methods=['POST'])
 def save_token():
@@ -49,15 +52,17 @@ def search():
 	x = request.json
 	results = list(books.find({}, {'_id': False}))
 
-	cont = x['cont'].split()
-	if(cont[0] in smile.key()):
-		cont = map(fun, cont)
+	cont = x['cont'].split(' ')
+	if(cont[0] in smile.keys()):
+		cont = list(map(fun, cont))
+		#		print('!', cont)
+	cont = ' '.join(cont)
 
 	#description
 	texts = []
 	for result in results:
 		texts.append(result['description'])
-	keyword = x['cont']
+	keyword = cont
 
 	texts = [jieba.lcut(text) for text in texts]
 	dictionary = corpora.Dictionary(texts)
@@ -72,7 +77,7 @@ def search():
 	texts = []
 	for result in results:
 		texts.append(result['name'])
-	keyword = x['cont']
+	keyword = cont
 
 	texts = [jieba.lcut(text) for text in texts]
 	dictionary = corpora.Dictionary(texts)
@@ -88,7 +93,7 @@ def search():
 	texts = []
 	for result in results:
 		texts.append(result['author'])
-	keyword = x['cont']
+	keyword = cont
 
 	texts = [jieba.lcut(text) for text in texts]
 	dictionary = corpora.Dictionary(texts)
@@ -103,9 +108,9 @@ def search():
 	obj_with_sim = []
 	for i in range(len(sim1)):
                 if(sim2[i] > 0.95):
-                    obj_with_sim.append([result[i], sim2[i]])
+                    obj_with_sim.append([results[i], sim2[i]])
                 elif(sim3[i] > 0.95):
-                    obj_with_sim.append([result[i], sim3[i]])
+                    obj_with_sim.append([results[i], sim3[i]])
                 else:
                     obj_with_sim.append([results[i], sim1[i]])
 
