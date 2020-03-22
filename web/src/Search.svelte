@@ -13,7 +13,9 @@
 		if (text.length) {
 			status = 3;
 		} else {
-			status = 2;
+			if (status !== 0) {
+				status = 2;
+			}
 		}
     }
 </script>
