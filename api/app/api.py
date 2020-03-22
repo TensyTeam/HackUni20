@@ -13,7 +13,12 @@ db = cluster['hackuniversity2020']
 users = db['users']
 books = db['books']
 
-smile = {😂 ♥️ 🤔 🔥 🕵️ 😳 😭 👽 😱 🤘 👩‍ 🎓 }
+smile = {"😂": "комедия", "♥️": "любовь", "🤔": "сложный", "🔥": "горячее", \
+"🕵️": "детектив", "😳": "смущение", "😭": "драма", "👽": "фантастика", \
+"😱": "удивление", "🤘": "великое", "🤯": "взрыв", "👩‍🎓": "учеба"}
+
+def fun(s):
+	return smile[s]
 
 @app.route('/top', methods=['POST'])
 def save_token():
@@ -43,6 +48,10 @@ def save_token():
 def search():
 	x = request.json
 	results = list(books.find({}, {'_id': False}))
+
+	cont = x['cont'].split()
+	if(cont[0] in smile.key()):
+		cont = map(fun, cont)
 
 	#description
 	texts = []
