@@ -57,7 +57,7 @@ with open('data.json', 'w') as file:
 				'description': description,
 				'kind': kind_id + 1,
 			}
-			data = json.dumps(req, ensure_ascii=False, indent='\t')
+			data = json.dumps(req, ensure_ascii=False)
 
 			print(data, file=file)
 
